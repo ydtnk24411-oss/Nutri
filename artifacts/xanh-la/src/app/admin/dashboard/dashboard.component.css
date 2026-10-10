@@ -1,0 +1,194 @@
+/* ── Loading ───────────────────────────────────────── */
+.dash-loading {
+  text-align: center;
+  padding: 80px 24px;
+  color: #888;
+  font-size: 15px;
+}
+
+/* ── Section wrapper ───────────────────────────────── */
+.dash-section {
+  margin-bottom: 40px;
+}
+
+.dash-section-h {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: #1a2e18;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.01em;
+}
+
+/* ══════════════════════════════════════════════════════
+   TỔNG QUAN HOẠT ĐỘNG
+═══════════════════════════════════════════════════════ */
+.dash-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.dash-ov-card {
+  background: #faf9f6;
+  border: 1px solid #e0ddd8;
+  border-radius: 4px;
+  padding: 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+  transition: box-shadow 0.15s;
+  cursor: pointer;
+}
+.dash-ov-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.dash-ov-label {
+  font-size: 13px;
+  color: #666;
+  letter-spacing: 0.01em;
+}
+
+.dash-ov-value {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 52px;
+  font-weight: 400;
+  color: #1a2e18;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.dash-ov-sub {
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+/* ══════════════════════════════════════════════════════
+   HIỆU SUẤT BÁN HÀNG
+═══════════════════════════════════════════════════════ */
+.dash-charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.dash-chart-card {
+  background: #faf9f6;
+  border: 1px solid #e0ddd8;
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.dash-chart-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+}
+
+/* ── Bar chart ─────────────────────────────────────── */
+.dash-bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 160px;
+  padding-bottom: 28px;
+  position: relative;
+}
+
+.dash-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.dash-bar-wrap {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  justify-content: center;
+}
+
+.dash-bar {
+  width: 60%;
+  background: #3d4d3a;
+  border-radius: 2px 2px 0 0;
+  transition: height 0.4s ease;
+  min-height: 8px;
+}
+
+.dash-bar.dash-bar-highlight {
+  background: #e9f0d8; /* màu nhạt xen kẽ như ảnh */
+}
+
+.dash-bar-label {
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+  margin-top: 8px;
+  white-space: nowrap;
+}
+
+/* ── Line chart ────────────────────────────────────── */
+.dash-line-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dash-line-chart svg {
+  display: block;
+  width: 100%;
+  height: 120px;
+}
+
+.dash-line-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.dash-line-labels span {
+  font-size: 11px;
+  color: #3d8fa0;
+}
+
+/* ══════════════════════════════════════════════════════
+   ĐƠN HÀNG GẦN ĐÂY
+═══════════════════════════════════════════════════════ */
+.dash-recent-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 900px) {
+  .dash-overview-grid { grid-template-columns: repeat(2, 1fr); }
+  .dash-charts-row    { grid-template-columns: 1fr; }
+  .dash-ov-value      { font-size: 38px; }
+}
+
+@media (max-width: 560px) {
+  .dash-overview-grid { grid-template-columns: 1fr 1fr; }
+  .dash-ov-value      { font-size: 32px; }
+}
+
+.dash-chart-empty {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bbb;
+  font-size: 13px;
+  font-style: italic;
+}

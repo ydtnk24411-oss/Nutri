@@ -1,0 +1,163 @@
+<!-- Loading -->
+@if (loading()) {
+  <div class="dash-loading">
+    <div class="admin-spinner" style="width:36px;height:36px;border-width:3px;border-color:rgba(61,77,58,.15);border-top-color:#3d4d3a;margin:0 auto 12px"></div>
+    <p>Đang tải dữ liệu...</p>
+  </div>
+}
+@if (error()) {
+  <div class="admin-alert admin-alert-error" style="margin-bottom:24px">⚠ {{ error() }}</div>
+}
+
+@if (!loading() && stats(); as s) {
+
+  <!-- ══════════════════════════════════════════
+       SECTION 1: Tổng quan hoạt động
+  ══════════════════════════════════════════ -->
+  <section class="dash-section">
+    <h2 class="dash-section-h">Tổng quan hoạt động</h2>
+
+    <div class="dash-overview-grid">
+      @for (card of overviewCards; track card.key) {
+        <a [routerLink]="card.route" class="dash-ov-card">
+          <div class="dash-ov-label">{{ card.label }}</div>
+          <div class="dash-ov-value">
+            @if (card.isRevenue) {
+              {{ formatBig(statValue(card.key)) }}
+            } @else {
+              {{ statValue(card.key) }}
+            }
+          </div>
+          <div class="dash-ov-sub" [style.color]="card.subColor">{{ card.sub }}</div>
+        </a>
+      }
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 2: Hiệu suất bán hàng
+  ══════════════════════════════════════════ -->
+  <section class="dash-section">
+    <h2 class="dash-section-h">Hiệu suất bán hàng</h2>
+
+    <div class="dash-charts-row">
+
+      <!-- Bar chart: Doanh thu theo sản phẩm -->
+      <div class="dash-chart-card">
+        <div class="dash-chart-title" style="color:#c0392b">Doanh thu theo sản phẩm</div>
+
+        @if (barData().length === 0) {
+          <div class="dash-chart-empty">Chưa có dữ liệu doanh thu</div>
+        } @else {
+          <div class="dash-bar-chart">
+            @for (bar of barData(); track bar.label; let i = $index) {
+              <div class="dash-bar-col">
+                <div class="dash-bar-wrap">
+                  <div class="dash-bar"
+                       [class.dash-bar-highlight]="isHighlight(i)"
+                       [style.height.px]="barHeight(bar.revenue)">
+                  </div>
+                </div>
+                <div class="dash-bar-label">{{ bar.label }}</div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Line chart: Tăng trưởng khách hàng -->
+      <div class="dash-chart-card">
+        <div class="dash-chart-title" style="color:#c0392b">Tăng trưởng khách hàng</div>
+
+        <div class="dash-line-chart">
+          <svg width="100%" height="120" viewBox="0 0 440 120" preserveAspectRatio="none">
+            <!-- Grid line ngang giữa -->
+            <line x1="0" y1="60" x2="440" y2="60" stroke="#e0e0e0" stroke-width="1"/>
+            <!-- Line chart — flat khi chưa có data nhiều -->
+            <polyline
+              [attr.points]="linePoints"
+              fill="none"
+              stroke="#3d4d3a"
+              stroke-width="2.5"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+            />
+            <!-- Dots -->
+            @for (d of lineData(); track d.month; let i = $index) {
+              <circle
+                [attr.cx]="(i / (lineData().length - 1)) * 400 + 20"
+                cy="60"
+                r="4"
+                fill="#3d4d3a"
+              />
+            }
+          </svg>
+
+          <!-- X axis labels -->
+          <div class="dash-line-labels">
+            @for (d of lineData(); track d.month) {
+              <span>{{ d.month }}</span>
+            }
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 3: Đơn hàng gần đây
+  ══════════════════════════════════════════ -->
+  <section class="dash-section">
+    <div class="dash-recent-header">
+      <h2 class="dash-section-h" style="margin:0">Đơn hàng gần đây</h2>
+      <a routerLink="/admin/orders" class="admin-btn-secondary" style="font-size:13px;padding:6px 16px">
+        Xem tất cả →
+      </a>
+    </div>
+
+    @if (s.recentOrders.length === 0) {
+      <div class="admin-empty" style="padding:32px;background:#fff;border-radius:8px;border:1px solid #e8eaed">
+        <p>Chưa có đơn hàng nào.</p>
+      </div>
+    } @else {
+      <div class="admin-card" style="padding:0;overflow:hidden">
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Mã đơn</th>
+                <th>Khách hàng</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Ngày đặt</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (order of s.recentOrders; track order._id) {
+                <tr>
+                  <td>
+                    <code style="font-size:12px;background:#f5f5f5;padding:2px 7px;border-radius:4px">
+                      {{ order.orderCode }}
+                    </code>
+                  </td>
+                  <td>{{ order.guestName || '—' }}</td>
+                  <td><strong>{{ formatPrice(order.total) }}</strong></td>
+                  <td>
+                    <span class="admin-badge" [class]="'badge-' + order.status">
+                      {{ orderStatusMap[order.status] || order.status }}
+                    </span>
+                  </td>
+                  <td style="color:#888;font-size:12px">
+                    {{ order.createdAt | date:'dd/MM/yyyy HH:mm' }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }
+  </section>
+
+}

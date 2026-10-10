@@ -1,0 +1,867 @@
+/* ==========================================================================
+   XANH LÁ — Global Design System
+   Style: Tươi sáng, xanh lá + vàng nghệ, rau củ Việt Nam
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: #f8fdf4;
+  color: #1c3a1c;
+  font-family: 'Be Vietnam Pro', 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; transition: color .15s; }
+button, input, select, textarea { font-family: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ==========================================================================
+   DESIGN TOKENS — Xanh + Vàng
+   ========================================================================== */
+:root {
+  /* Fonts */
+  --xanh-font-display: 'Playfair Display', Georgia, serif;
+  --xanh-font-text:    'Be Vietnam Pro', 'Segoe UI', sans-serif;
+
+  /* Màu chính: xanh lá */
+  --xanh-primary:       #2d6a2d;   /* xanh đậm — CTA, header */
+  --xanh-primary-light: #4a8f4a;   /* hover */
+  --xanh-primary-bg:    #e8f5e8;   /* nền nhạt xanh */
+  --xanh-leaf:          #56a856;   /* xanh lá tươi */
+
+  /* Màu phụ: vàng nghệ */
+  --vang-primary:       #e8a020;   /* vàng nghệ đậm */
+  --vang-light:         #ffc947;   /* vàng sáng */
+  --vang-bg:            #fff8e6;   /* nền vàng nhạt */
+  --vang-deep:          #c77f00;   /* vàng tối — text trên nền sáng */
+
+  /* Neutrals */
+  --xanh-paper:         #f8fdf4;   /* nền trang */
+  --xanh-white:         #ffffff;
+  --xanh-cream:         #fdfaf2;   /* nền section nhạt */
+  --xanh-ink:           #1c3a1c;   /* text chính */
+  --xanh-muted:         #5a7a5a;   /* text phụ */
+  --xanh-line:          #d4e8d4;   /* border */
+  --xanh-line-2:        #e8f0e8;
+
+  /* Aliases cũ (giữ để không break code cũ) */
+  --xanh-moss:          var(--xanh-primary);
+  --xanh-moss-hover:    var(--xanh-primary-light);
+  --xanh-paper-deep:    var(--xanh-primary-bg);
+  --xanh-sage:          #8ab88a;
+  --xanh-warm:          var(--vang-primary);
+  --xanh-light-green:   #d4f0d4;
+
+  /* Radius */
+  --xanh-radius-xs:   4px;
+  --xanh-radius-sm:   8px;
+  --xanh-radius-md:   14px;
+  --xanh-radius-lg:   20px;
+  --xanh-radius-xl:   28px;
+  --xanh-radius-full: 9999px;
+
+  /* Shadows */
+  --xanh-shadow-sm: 0 2px 8px rgba(45,106,45,.08);
+  --xanh-shadow-md: 0 6px 20px rgba(45,106,45,.12);
+  --xanh-shadow-lg: 0 14px 40px rgba(45,106,45,.15);
+  --vang-shadow:    0 4px 16px rgba(232,160,32,.25);
+}
+
+/* ==========================================================================
+   SITE WRAPPER
+   ========================================================================== */
+.xanhla-site {
+  min-height: 100vh;
+  background: var(--xanh-paper);
+  color: var(--xanh-ink);
+}
+
+.xanhla-site *, .xanhla-site *::before, .xanhla-site *::after { box-sizing: border-box; }
+.xanhla-site a { color: inherit; text-decoration: none; transition: color .15s; }
+
+/* ==========================================================================
+   TOP BANNER
+   ========================================================================== */
+.xanhla-wix-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--xanh-primary);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  gap: 8px;
+}
+.xanhla-wix-bar::before { content: ''; width: 6px; height: 6px; background: var(--vang-light); border-radius: 50%; }
+.xanhla-wix-bar a { color: var(--vang-light); text-decoration: underline; }
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.xanhla-header {
+  position: sticky;
+  top: 38px;
+  z-index: 40;
+  display: flex;
+  height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 max(20px, 4vw);
+  background: #fff;
+  border-bottom: 2px solid var(--xanh-line);
+  box-shadow: 0 2px 12px rgba(45,106,45,.08);
+}
+
+.xanhla-logo { display: flex; align-items: center; height: 48px; flex-shrink: 0; }
+.xanhla-logo img { height: 100%; width: auto; max-width: 140px; object-fit: contain; }
+
+.xanhla-nav { display: flex; align-items: center; gap: clamp(12px,1.8vw,28px); }
+.xanhla-nav a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--xanh-ink);
+  padding: 6px 4px;
+  position: relative;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+.xanhla-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 2px;
+  background: var(--vang-primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .2s;
+  border-radius: 2px;
+}
+.xanhla-nav a:hover::after,
+.xanhla-nav a.is-active::after { transform: scaleX(1); }
+.xanhla-nav a.is-active { color: var(--xanh-primary); }
+.xanhla-nav a:hover { color: var(--xanh-primary); }
+
+.xanhla-header-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+
+.xanhla-member-bar {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--xanh-primary-bg); border: 1px solid var(--xanh-line);
+  border-radius: var(--xanh-radius-full); cursor: pointer;
+  padding: 6px 14px; font-size: 13px; font-weight: 600;
+  color: var(--xanh-primary); transition: all .15s;
+}
+.xanhla-member-bar:hover { background: var(--xanh-primary); color: #fff; }
+
+.xanhla-member-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--xanh-primary); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+}
+.xanhla-member-avatar-placeholder {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 2px solid var(--xanh-primary);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--xanh-primary);
+}
+
+.xanhla-cart-button {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px; border-radius: 50%; border: none;
+  background: var(--vang-bg); color: var(--vang-deep);
+  cursor: pointer; transition: all .15s;
+}
+.xanhla-cart-button:hover { background: var(--vang-primary); color: #fff; }
+
+.xanhla-cart-badge {
+  position: absolute; top: 2px; right: 2px;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--xanh-primary); color: #fff;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid #fff;
+}
+
+.xanhla-mobile-toggle { display: none; background: transparent; border: none; cursor: pointer; color: var(--xanh-ink); }
+
+.xanhla-user-menu {
+  position: absolute; top: 72px; right: max(20px, 4vw);
+  background: #fff; border: 1px solid var(--xanh-line);
+  border-radius: var(--xanh-radius-md); box-shadow: var(--xanh-shadow-lg);
+  width: 220px; padding: 8px 0; z-index: 60;
+  border-top: 3px solid var(--xanh-primary);
+}
+.xanhla-user-menu-header { padding: 10px 16px; border-bottom: 1px solid var(--xanh-line); }
+.xanhla-user-menu-header strong { display: block; font-size: 14px; color: var(--xanh-ink); }
+.xanhla-user-menu-header span  { display: block; font-size: 12px; color: var(--xanh-muted); }
+.xanhla-user-menu a, .xanhla-user-menu button {
+  display: block; width: 100%; text-align: left; padding: 9px 16px;
+  font-size: 14px; color: var(--xanh-ink); background: transparent; border: none; cursor: pointer;
+  transition: background .1s;
+}
+.xanhla-user-menu a:hover, .xanhla-user-menu button:hover {
+  background: var(--xanh-primary-bg); color: var(--xanh-primary);
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.xanhla-btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 28px;
+  background: var(--xanh-primary);
+  color: #fff !important;
+  font-size: 15px; font-weight: 700;
+  border-radius: var(--xanh-radius-full);
+  border: 2px solid var(--xanh-primary);
+  cursor: pointer; transition: all .2s; letter-spacing: 0.02em;
+}
+.xanhla-btn-primary:hover {
+  background: var(--xanh-primary-light);
+  border-color: var(--xanh-primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--xanh-shadow-md);
+}
+.xanhla-btn-primary:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+.xanhla-btn-secondary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 28px;
+  background: transparent; color: var(--xanh-primary);
+  font-size: 15px; font-weight: 700;
+  border-radius: var(--xanh-radius-full);
+  border: 2px solid var(--xanh-primary);
+  cursor: pointer; transition: all .2s;
+}
+.xanhla-btn-secondary:hover {
+  background: var(--xanh-primary); color: #fff !important;
+  transform: translateY(-2px);
+}
+
+.xanhla-btn-light {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 28px;
+  background: #fff; color: var(--xanh-ink);
+  font-size: 15px; font-weight: 700;
+  border-radius: var(--xanh-radius-full);
+  border: 2px solid rgba(255,255,255,.6);
+  cursor: pointer; transition: all .2s;
+}
+.xanhla-btn-light:hover { background: var(--vang-light); border-color: var(--vang-light); }
+
+.xanhla-btn-outline {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 9px 20px;
+  background: transparent; color: var(--xanh-primary);
+  font-size: 14px; font-weight: 700;
+  border-radius: var(--xanh-radius-full);
+  border: 2px solid var(--xanh-primary);
+  cursor: pointer; transition: all .2s;
+}
+.xanhla-btn-outline:hover { background: var(--xanh-primary); color: #fff !important; }
+
+/* Yellow CTA button */
+.xanhla-btn-yellow {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 28px;
+  background: var(--vang-primary); color: #fff !important;
+  font-size: 15px; font-weight: 700;
+  border-radius: var(--xanh-radius-full);
+  border: 2px solid var(--vang-primary);
+  cursor: pointer; transition: all .2s;
+}
+.xanhla-btn-yellow:hover { background: var(--vang-deep); border-color: var(--vang-deep); transform: translateY(-2px); }
+
+/* ==========================================================================
+   LAYOUT / CONTAINERS
+   ========================================================================== */
+.xanhla-container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 max(20px, 4vw); }
+.xanhla-sec       { padding: clamp(56px, 8vw, 96px) 0; }
+
+.xanhla-sec-title {
+  font-family: var(--xanh-font-display);
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 700; color: var(--xanh-ink);
+  margin: 0 0 10px 0; line-height: 1.2; letter-spacing: -0.02em;
+}
+
+.xanhla-sec-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--vang-bg); color: var(--vang-deep);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 14px; border-radius: var(--xanh-radius-full);
+  border: 1px solid rgba(232,160,32,.3); margin-bottom: 12px;
+}
+
+.xanhla-sec-desc  { font-size: 16px; color: var(--xanh-muted); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+.xanhla-sec-header-center { text-align: center; margin-bottom: 48px; }
+.xanhla-sec-header-between { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 40px; flex-wrap: wrap; gap: 16px; }
+
+/* ==========================================================================
+   CATEGORY CARDS
+   ========================================================================== */
+.xanhla-category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+.xanhla-cat-card {
+  position: relative; border-radius: var(--xanh-radius-lg); overflow: hidden;
+  background: #fff; box-shadow: var(--xanh-shadow-sm);
+  transition: transform .25s, box-shadow .25s; display: block;
+  border: 2px solid transparent;
+}
+.xanhla-cat-card:hover {
+  transform: translateY(-6px); box-shadow: var(--xanh-shadow-lg);
+  border-color: var(--vang-primary);
+}
+
+.xanhla-cat-img { aspect-ratio: 4/3; width: 100%; overflow: hidden; }
+.xanhla-cat-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.xanhla-cat-card:hover .xanhla-cat-img img { transform: scale(1.08); }
+
+.xanhla-cat-card h5 {
+  font-family: var(--xanh-font-display);
+  font-size: 18px; font-weight: 600;
+  padding: 14px 18px 16px; margin: 0;
+  color: var(--xanh-ink); text-align: center;
+}
+
+/* Overlay badge on category */
+.xanhla-cat-overlay {
+  position: absolute; top: 10px; left: 10px;
+  background: var(--vang-primary); color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  padding: 3px 10px; border-radius: var(--xanh-radius-full);
+}
+
+/* ==========================================================================
+   PRODUCT CARDS (Carousel + Grid)
+   ========================================================================== */
+.xanhla-carousel-wrap { position: relative; overflow: hidden; }
+.xanhla-carousel-track { display: flex; gap: 20px; transition: transform .35s ease; }
+
+.xanhla-prod-card {
+  flex: 0 0 calc((100% - 60px) / 4);
+  background: #fff; border-radius: var(--xanh-radius-lg); overflow: hidden;
+  box-shadow: var(--xanh-shadow-sm);
+  transition: transform .25s, box-shadow .25s; display: flex; flex-direction: column;
+  border: 2px solid transparent;
+}
+.xanhla-prod-card:hover { transform: translateY(-5px); box-shadow: var(--xanh-shadow-lg); border-color: var(--xanh-line); }
+
+.xanhla-prod-card-img { aspect-ratio: 1/1; width: 100%; background: var(--xanh-primary-bg); overflow: hidden; display: block; position: relative; }
+.xanhla-prod-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.xanhla-prod-card:hover .xanhla-prod-card-img img { transform: scale(1.06); }
+
+/* Fresh badge on product */
+.xanhla-prod-badge {
+  position: absolute; top: 10px; left: 10px;
+  background: var(--xanh-primary); color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: var(--xanh-radius-full);
+}
+.xanhla-prod-badge-yellow {
+  position: absolute; top: 10px; left: 10px;
+  background: var(--vang-primary); color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 3px 10px; border-radius: var(--xanh-radius-full);
+}
+
+.xanhla-prod-card-body { padding: 16px 18px 18px; display: flex; flex-direction: column; flex: 1; gap: 4px; }
+.xanhla-prod-card-cat  { font-size: 11px; font-weight: 700; color: var(--xanh-leaf); text-transform: uppercase; letter-spacing: .06em; }
+.xanhla-prod-card-name { font-size: 16px; font-weight: 700; color: var(--xanh-ink); margin-bottom: 2px; line-height: 1.3; }
+.xanhla-prod-card-desc { font-size: 12px; color: var(--xanh-muted); line-height: 1.5; margin-bottom: 8px; flex: 1;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.xanhla-prod-card-price { font-size: 18px; font-weight: 800; color: var(--xanh-primary); }
+.xanhla-prod-card-price-old { font-size: 13px; color: #aaa; text-decoration: line-through; margin-left: 6px; }
+
+.xanhla-prod-card-add {
+  margin-top: 12px;
+  width: 100%; padding: 9px;
+  background: var(--xanh-primary); color: #fff;
+  border: none; border-radius: var(--xanh-radius-sm);
+  font-size: 14px; font-weight: 700; cursor: pointer;
+  transition: all .2s; display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.xanhla-prod-card-add:hover { background: var(--xanh-primary-light); transform: translateY(-1px); }
+
+.xanhla-carousel-nav { display: flex; gap: 10px; }
+.xanhla-carousel-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 2px solid var(--xanh-line); background: #fff;
+  color: var(--xanh-primary); display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .15s;
+}
+.xanhla-carousel-btn:hover:not(:disabled) { border-color: var(--xanh-primary); background: var(--xanh-primary); color: #fff; }
+.xanhla-carousel-btn:disabled { opacity: .3; cursor: not-allowed; }
+
+/* ==========================================================================
+   ORIGIN SECTION
+   ========================================================================== */
+.xanhla-origin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px,5vw,64px); align-items: center; }
+.xanhla-origin-img { border-radius: var(--xanh-radius-xl); overflow: hidden; box-shadow: var(--xanh-shadow-lg); aspect-ratio: 4/3; }
+.xanhla-origin-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.xanhla-origin-content h2 {
+  font-family: var(--xanh-font-display);
+  font-size: clamp(26px, 3vw, 38px); font-weight: 700;
+  color: var(--xanh-ink); margin-bottom: 16px; line-height: 1.25;
+}
+.xanhla-origin-content p { font-size: 16px; color: var(--xanh-muted); line-height: 1.75; margin-bottom: 28px; }
+
+.xanhla-origin-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.xanhla-origin-feature {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; font-weight: 600; color: var(--xanh-ink);
+}
+.xanhla-origin-feature-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--vang-bg); display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+
+/* ==========================================================================
+   MEALS SECTION
+   ========================================================================== */
+.xanhla-meal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+.xanhla-meal-card {
+  background: #fff; border-radius: var(--xanh-radius-lg); overflow: hidden;
+  box-shadow: var(--xanh-shadow-sm); transition: transform .25s, box-shadow .25s; display: block;
+}
+.xanhla-meal-card:hover { transform: translateY(-5px); box-shadow: var(--xanh-shadow-lg); }
+.xanhla-meal-img { aspect-ratio: 16/10; overflow: hidden; }
+.xanhla-meal-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.xanhla-meal-card:hover .xanhla-meal-img img { transform: scale(1.06); }
+.xanhla-meal-body { padding: 20px 22px 22px; }
+.xanhla-meal-body h5 { font-family: var(--xanh-font-display); font-size: 19px; font-weight: 600; margin: 0 0 8px; color: var(--xanh-ink); }
+.xanhla-meal-body p { font-size: 13px; color: var(--xanh-muted); line-height: 1.55; margin: 0; }
+
+/* ==========================================================================
+   HERO BANNER
+   ========================================================================== */
+.xanhla-hero-banner {
+  position: relative; min-height: 580px; display: flex; align-items: center;
+  justify-content: center; overflow: hidden; text-align: center; color: #fff;
+  background: var(--xanh-primary);
+}
+.xanhla-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .6; }
+.xanhla-hero-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(30,70,30,.7) 0%, rgba(10,40,10,.5) 100%); }
+.xanhla-hero-content { position: relative; z-index: 2; max-width: 780px; padding: 48px 24px; }
+.xanhla-hero-content h1 {
+  font-family: var(--xanh-font-display);
+  font-size: clamp(38px, 6vw, 68px); font-weight: 700;
+  margin: 0 0 20px; letter-spacing: -0.02em; line-height: 1.1;
+}
+.xanhla-hero-content h1 span { color: var(--vang-light); }
+.xanhla-hero-content p { font-size: 18px; line-height: 1.7; color: rgba(255,255,255,.92); margin-bottom: 36px; }
+.xanhla-hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* Hero trust badges */
+.xanhla-hero-badges { display: flex; gap: 20px; justify-content: center; margin-top: 32px; flex-wrap: wrap; }
+.xanhla-hero-badge {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.15); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.25); border-radius: var(--xanh-radius-full);
+  padding: 8px 18px; font-size: 13px; font-weight: 600; color: #fff;
+}
+
+/* ==========================================================================
+   NUTRITION SECTION
+   ========================================================================== */
+.xanhla-nutrition-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 40px; }
+.xanhla-nutrition-card {
+  position: relative; border-radius: var(--xanh-radius-lg); overflow: hidden;
+  aspect-ratio: 3/4; box-shadow: var(--xanh-shadow-sm);
+  transition: transform .25s, box-shadow .25s; display: block;
+}
+.xanhla-nutrition-card:hover { transform: translateY(-5px); box-shadow: var(--xanh-shadow-lg); }
+.xanhla-nutrition-card img { width: 100%; height: 100%; object-fit: cover; }
+.xanhla-nutrition-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(20,60,20,.85) 0%, rgba(20,60,20,.1) 60%, transparent 100%);
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 24px;
+}
+.xanhla-nutrition-card h5 { font-family: var(--xanh-font-display); font-size: 22px; font-weight: 700; color: #fff; margin: 0 0 6px; }
+.xanhla-nutrition-card-sub { font-size: 13px; color: rgba(255,255,255,.8); }
+.xanhla-nutrition-cta { text-align: center; }
+
+/* ==========================================================================
+   PROMO BANNER (giữa trang)
+   ========================================================================== */
+.xanhla-promo-banner {
+  background: linear-gradient(135deg, var(--xanh-primary) 0%, #1a4a1a 100%);
+  border-radius: var(--xanh-radius-xl);
+  padding: 48px 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 32px; flex-wrap: wrap;
+  position: relative; overflow: hidden;
+}
+.xanhla-promo-banner::before {
+  content: '';
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  font-size: 120px; opacity: .12; pointer-events: none;
+}
+.xanhla-promo-banner h3 {
+  font-family: var(--xanh-font-display);
+  font-size: 28px; font-weight: 700; color: #fff; margin: 0 0 8px;
+}
+.xanhla-promo-banner p { font-size: 15px; color: rgba(255,255,255,.8); margin: 0; }
+
+/* ==========================================================================
+   STATS STRIP
+   ========================================================================== */
+.xanhla-stats-strip {
+  display: flex; align-items: stretch;
+  background: var(--xanh-primary);
+  border-radius: var(--xanh-radius-lg);
+  overflow: hidden;
+}
+.xanhla-stat-item {
+  flex: 1; padding: 28px 24px; text-align: center;
+  border-right: 1px solid rgba(255,255,255,.15);
+}
+.xanhla-stat-item:last-child { border-right: none; }
+.xanhla-stat-num {
+  font-family: var(--xanh-font-display);
+  font-size: 36px; font-weight: 700; color: var(--vang-light); line-height: 1;
+  display: block; margin-bottom: 6px;
+}
+.xanhla-stat-label { font-size: 13px; color: rgba(255,255,255,.8); font-weight: 500; }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.xanhla-footer {
+  background: #0f2a0f;
+  color: rgba(255,255,255,.85);
+  padding: 64px 0 0;
+}
+.xanhla-footer-main { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1.2fr; gap: 48px; margin-bottom: 48px; }
+
+.xanhla-footer-brand .xanhla-logo img { filter: brightness(10); }
+.xanhla-footer-brand p { color: rgba(255,255,255,.6); font-size: 14px; margin: 12px 0; line-height: 1.7; }
+.xanhla-footer-brand a { color: var(--vang-light); font-size: 14px; }
+
+.xanhla-footer-col h4 {
+  font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--vang-light); margin: 0 0 16px;
+}
+.xanhla-footer-col a { display: block; color: rgba(255,255,255,.65); font-size: 14px; padding: 5px 0; transition: color .15s; }
+.xanhla-footer-col a:hover { color: var(--vang-light); }
+
+.xanhla-footer-newsletter h4 { font-size: 15px; font-weight: 700; color: #fff; margin: 0 0 12px; }
+.xanhla-footer-newsletter p { font-size: 13px; color: rgba(255,255,255,.6); margin: 0 0 16px; line-height: 1.6; }
+
+.xanhla-newsletter-form { display: flex; gap: 0; }
+.xanhla-newsletter-form input {
+  flex: 1; padding: 12px 16px;
+  border: 1.5px solid rgba(255,255,255,.2);
+  border-right: none;
+  border-radius: var(--xanh-radius-sm) 0 0 var(--xanh-radius-sm);
+  background: rgba(255,255,255,.08); color: #fff; font-size: 14px;
+}
+.xanhla-newsletter-form input::placeholder { color: rgba(255,255,255,.4); }
+.xanhla-newsletter-form input:focus { outline: none; border-color: var(--vang-primary); }
+.xanhla-newsletter-form button {
+  padding: 12px 20px;
+  border-radius: 0 var(--xanh-radius-sm) var(--xanh-radius-sm) 0;
+  background: var(--vang-primary); color: #fff; border: none; cursor: pointer;
+  font-size: 14px; font-weight: 700; transition: background .15s; white-space: nowrap;
+}
+.xanhla-newsletter-form button:hover { background: var(--vang-deep); }
+
+.xanhla-footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding: 20px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; color: rgba(255,255,255,.45);
+  flex-wrap: wrap; gap: 12px;
+}
+
+/* ==========================================================================
+   SHOP / CATALOG
+   ========================================================================== */
+.xanhla-shop-layout { display: grid; grid-template-columns: 270px 1fr; gap: 36px; padding: 36px 0 80px; }
+
+.xanhla-sidebar {
+  background: #fff; border: 1.5px solid var(--xanh-line);
+  border-radius: var(--xanh-radius-md); padding: 24px; height: fit-content;
+  box-shadow: var(--xanh-shadow-sm);
+}
+.xanhla-sidebar-section-title {
+  font-size: 14px; font-weight: 700; color: var(--xanh-ink);
+  margin: 0 0 16px; display: flex; align-items: center; justify-content: space-between;
+  text-transform: uppercase; letter-spacing: .05em;
+}
+
+.xanhla-browse-list { list-style: none; padding: 0; margin: 0 0 20px; border-bottom: 1.5px solid var(--xanh-line); padding-bottom: 16px; }
+.xanhla-browse-list li a { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 14px; color: var(--xanh-muted); transition: color .15s; }
+.xanhla-browse-list li a:hover, .xanhla-browse-list li a.is-active { color: var(--xanh-primary); font-weight: 700; }
+
+.xanhla-filter-group { border-bottom: 1px solid var(--xanh-line-2); padding: 12px 0; }
+.xanhla-filter-group-header {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; background: transparent; border: none; cursor: pointer;
+  font-size: 14px; font-weight: 700; color: var(--xanh-ink); padding: 4px 0; text-align: left;
+}
+.xanhla-filter-group-content { padding-top: 12px; display: flex; flex-direction: column; gap: 9px; }
+
+.xanhla-checkbox-label { display: flex; align-items: center; gap: 9px; font-size: 14px; color: var(--xanh-muted); cursor: pointer; }
+.xanhla-checkbox-label input[type="checkbox"] { width: 17px; height: 17px; accent-color: var(--xanh-primary); cursor: pointer; }
+.xanhla-checkbox-label:hover { color: var(--xanh-primary); }
+
+.xanhla-price-slider { display: flex; flex-direction: column; gap: 8px; }
+.xanhla-price-range-inputs { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: var(--xanh-primary); }
+.xanhla-price-slider input[type="range"] { width: 100%; accent-color: var(--xanh-primary); }
+
+.xanhla-clear-filters-btn { font-size: 13px; color: var(--vang-deep); background: transparent; border: none; cursor: pointer; text-decoration: underline; }
+
+.xanhla-shop-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1.5px solid var(--xanh-line);
+}
+.xanhla-shop-count { font-size: 14px; color: var(--xanh-muted); }
+.xanhla-sort-select { padding: 8px 14px; border: 1.5px solid var(--xanh-line); border-radius: var(--xanh-radius-sm); background: #fff; font-size: 14px; cursor: pointer; }
+
+.xanhla-shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+/* ==========================================================================
+   PRODUCT DETAIL
+   ========================================================================== */
+.xanhla-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--xanh-muted); margin-bottom: 28px; }
+.xanhla-breadcrumb a:hover { color: var(--xanh-primary); }
+
+.xanhla-product-detail-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-bottom: 56px; }
+.xanhla-product-gallery-main { border-radius: var(--xanh-radius-xl); overflow: hidden; background: var(--xanh-primary-bg); aspect-ratio: 1/1; }
+.xanhla-product-gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+
+.xanhla-product-info-panel h1 { font-family: var(--xanh-font-display); font-size: 34px; font-weight: 700; margin: 0 0 10px; color: var(--xanh-ink); }
+.xanhla-product-info-price { font-size: 28px; font-weight: 800; color: var(--xanh-primary); margin-bottom: 20px; }
+
+.xanhla-option-group { margin-bottom: 18px; }
+.xanhla-option-label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--xanh-ink); text-transform: uppercase; letter-spacing: .05em; }
+.xanhla-option-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
+.xanhla-option-btn {
+  padding: 7px 16px; border: 2px solid var(--xanh-line); background: #fff;
+  border-radius: var(--xanh-radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s;
+}
+.xanhla-option-btn.is-active { border-color: var(--xanh-primary); background: var(--xanh-primary); color: #fff; }
+.xanhla-option-btn:hover:not(.is-active) { border-color: var(--xanh-primary); color: var(--xanh-primary); }
+
+.xanhla-quantity-picker {
+  display: inline-flex; align-items: center;
+  border: 2px solid var(--xanh-line); border-radius: var(--xanh-radius-sm); background: #fff; height: 44px;
+}
+.xanhla-quantity-picker button { width: 40px; height: 100%; background: transparent; border: none; cursor: pointer; font-size: 20px; color: var(--xanh-primary); transition: background .1s; }
+.xanhla-quantity-picker button:hover { background: var(--xanh-primary-bg); }
+.xanhla-quantity-picker span { width: 48px; text-align: center; font-size: 16px; font-weight: 700; color: var(--xanh-ink); }
+
+.xanhla-product-cta-row { display: flex; gap: 12px; margin: 28px 0; flex-wrap: wrap; }
+
+.xanhla-product-accordions { border-top: 1.5px solid var(--xanh-line); }
+.xanhla-p-accordion { border-bottom: 1px solid var(--xanh-line-2); padding: 14px 0; }
+.xanhla-p-accordion-header { display: flex; justify-content: space-between; align-items: center; width: 100%; background: transparent; border: none; font-size: 15px; font-weight: 700; color: var(--xanh-ink); cursor: pointer; text-align: left; }
+.xanhla-p-accordion-body { padding-top: 10px; font-size: 14px; color: var(--xanh-muted); line-height: 1.65; }
+
+/* ==========================================================================
+   ONLINE ORDERS
+   ========================================================================== */
+.xanhla-ordering-banner {
+  background: linear-gradient(135deg, var(--xanh-primary-bg) 0%, var(--vang-bg) 100%);
+  border: 1.5px solid var(--xanh-line);
+  border-radius: var(--xanh-radius-xl); padding: 32px 36px; margin-bottom: 32px;
+}
+.xanhla-ordering-status-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: #1a7a1a; margin-bottom: 16px; }
+.xanhla-green-dot { width: 10px; height: 10px; border-radius: 50%; background: #2b8a3e; box-shadow: 0 0 0 4px rgba(43,138,62,.2); }
+
+.xanhla-fulfillment-tabs { display: inline-flex; background: rgba(45,106,45,.08); padding: 4px; border-radius: var(--xanh-radius-full); margin-bottom: 16px; }
+.xanhla-fulfillment-tab { padding: 9px 26px; border-radius: var(--xanh-radius-full); border: none; background: transparent; font-size: 14px; font-weight: 700; color: var(--xanh-muted); cursor: pointer; transition: all .15s; }
+.xanhla-fulfillment-tab.is-active { background: var(--xanh-primary); color: #fff; box-shadow: var(--xanh-shadow-sm); }
+
+.xanhla-fulfillment-info { font-size: 13px; color: var(--xanh-muted); display: flex; gap: 24px; flex-wrap: wrap; }
+
+.xanhla-order-nav-bar { position: sticky; top: 110px; z-index: 30; display: flex; gap: 4px; background: var(--xanh-paper); padding: 12px 0; border-bottom: 1.5px solid var(--xanh-line); margin-bottom: 32px; flex-wrap: wrap; }
+.xanhla-order-nav-item { font-size: 14px; font-weight: 700; color: var(--xanh-muted); cursor: pointer; padding: 8px 18px; border-radius: var(--xanh-radius-full); transition: all .15s; }
+.xanhla-order-nav-item.is-active { color: var(--xanh-primary); background: var(--xanh-primary-bg); }
+.xanhla-order-nav-item:hover { color: var(--xanh-primary); }
+
+.xanhla-order-section { margin-bottom: 48px; }
+.xanhla-order-section h3 { font-family: var(--xanh-font-display); font-size: 24px; font-weight: 700; margin: 0 0 20px; color: var(--xanh-ink); }
+
+/* ==========================================================================
+   CART DRAWER
+   ========================================================================== */
+.xanhla-drawer-backdrop, .xanhla-modal-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,.5); backdrop-filter: blur(4px);
+  z-index: 100; display: flex; justify-content: flex-end;
+}
+.xanhla-modal-backdrop { justify-content: center; align-items: center; }
+
+.xanhla-cart-drawer {
+  width: min(440px, 100vw); height: 100%; background: #fff;
+  box-shadow: -8px 0 32px rgba(0,0,0,.2); display: flex; flex-direction: column;
+  animation: slideLeft .25s ease-out;
+  border-left: 3px solid var(--xanh-primary);
+}
+@keyframes slideLeft { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+.xanhla-drawer-header {
+  padding: 20px 24px; border-bottom: 1.5px solid var(--xanh-line);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--xanh-primary);
+}
+.xanhla-drawer-header h3 { font-family: var(--xanh-font-display); font-size: 20px; font-weight: 700; margin: 0; color: #fff; }
+.xanhla-drawer-close { background: rgba(255,255,255,.2); border: none; cursor: pointer; color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.xanhla-drawer-close:hover { background: rgba(255,255,255,.35); }
+
+.xanhla-drawer-body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.xanhla-drawer-item { display: flex; gap: 14px; padding-bottom: 16px; border-bottom: 1px solid var(--xanh-line-2); }
+.xanhla-drawer-item img { width: 72px; height: 72px; border-radius: var(--xanh-radius-sm); object-fit: cover; }
+.xanhla-drawer-item-info { flex: 1; }
+.xanhla-drawer-item-info h4 { font-size: 14px; font-weight: 700; margin: 0 0 4px; color: var(--xanh-ink); }
+.xanhla-drawer-item-info p { font-size: 14px; color: var(--xanh-primary); font-weight: 700; margin: 0 0 8px; }
+
+.xanhla-drawer-footer { padding: 20px 24px; border-top: 1.5px solid var(--xanh-line); background: var(--xanh-primary-bg); }
+.xanhla-drawer-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: 800; color: var(--xanh-primary); margin-bottom: 16px; }
+
+/* ==========================================================================
+   AUTH MODAL
+   ========================================================================== */
+.xanhla-auth-modal {
+  width: min(440px, 92vw); background: #fff;
+  border-radius: var(--xanh-radius-xl); box-shadow: var(--xanh-shadow-lg);
+  overflow: hidden; animation: popIn .2s ease-out;
+  border-top: 4px solid var(--xanh-primary);
+}
+@keyframes popIn { from { opacity: 0; transform: scale(0.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+.xanhla-auth-header { padding: 24px 28px 16px; display: flex; align-items: center; justify-content: space-between; }
+.xanhla-auth-tabs { display: flex; gap: 4px; border-bottom: 1.5px solid var(--xanh-line); padding: 0 28px; }
+.xanhla-auth-tab { padding: 12px 20px; background: transparent; border: none; font-size: 15px; font-weight: 700; color: var(--xanh-muted); cursor: pointer; position: relative; border-radius: var(--xanh-radius-sm) var(--xanh-radius-sm) 0 0; }
+.xanhla-auth-tab.is-active { color: var(--xanh-primary); background: var(--xanh-primary-bg); }
+.xanhla-auth-tab.is-active::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: var(--xanh-primary); }
+
+.xanhla-auth-body { padding: 28px; }
+.xanhla-auth-form { display: flex; flex-direction: column; gap: 16px; }
+.xanhla-auth-field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: var(--xanh-ink); text-transform: uppercase; letter-spacing: .04em; }
+.xanhla-auth-field input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--xanh-line); border-radius: var(--xanh-radius-sm); font-size: 15px; transition: border-color .15s; }
+.xanhla-auth-field input:focus { outline: none; border-color: var(--xanh-primary); }
+.xanhla-auth-divider { display: flex; align-items: center; gap: 12px; margin: 16px 0; color: var(--xanh-muted); font-size: 13px; }
+.xanhla-auth-divider::before, .xanhla-auth-divider::after { content: ''; flex: 1; height: 1px; background: var(--xanh-line); }
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .xanhla-footer-main { grid-template-columns: 1fr 1fr; }
+  .xanhla-prod-card { flex: 0 0 calc((100% - 40px) / 3); }
+}
+@media (max-width: 960px) {
+  .xanhla-nav { display: none; }
+  .xanhla-mobile-toggle { display: flex; }
+  .xanhla-category-grid, .xanhla-meal-grid, .xanhla-nutrition-grid, .xanhla-shop-grid { grid-template-columns: repeat(2, 1fr); }
+  .xanhla-shop-layout, .xanhla-origin-grid, .xanhla-product-detail-layout { grid-template-columns: 1fr; }
+  .xanhla-shop-layout .xanhla-sidebar { display: none; }
+  .xanhla-prod-card { flex: 0 0 calc((100% - 20px) / 2); }
+  .xanhla-promo-banner { padding: 32px 28px; }
+  .xanhla-stats-strip { flex-direction: column; }
+}
+@media (max-width: 600px) {
+  .xanhla-category-grid, .xanhla-meal-grid, .xanhla-nutrition-grid, .xanhla-shop-grid { grid-template-columns: 1fr; }
+  .xanhla-prod-card { flex: 0 0 80%; }
+  .xanhla-footer-main { grid-template-columns: 1fr; }
+  .xanhla-hero-badges { flex-direction: column; align-items: center; }
+}
+
+/* ==========================================================================
+   ADMIN CSS TOKENS (giữ nguyên)
+   ========================================================================== */
+.admin-card { background:#fff;border-radius:12px;border:1px solid #e8eaed;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.04); }
+.admin-page-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:24px; }
+.admin-page-title { font-size:22px;font-weight:700;color:#1a2e18;margin:0; }
+.admin-stat-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-bottom:28px; }
+.admin-stat-card { background:#fff;border-radius:12px;border:1px solid #e8eaed;padding:20px;display:flex;flex-direction:column;gap:8px; }
+.admin-stat-icon { font-size:28px; }
+.admin-stat-value { font-size:28px;font-weight:700;color:#1a2e18;line-height:1; }
+.admin-stat-label { font-size:13px;color:#666; }
+.admin-btn-primary { display:inline-flex;align-items:center;gap:6px;padding:9px 20px;background:#3d4d3a;color:#fff!important;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:background .15s;text-decoration:none; }
+.admin-btn-primary:hover { background:#2f3c2c; }
+.admin-btn-primary:disabled { opacity:.55;cursor:not-allowed; }
+.admin-btn-secondary { display:inline-flex;align-items:center;gap:6px;padding:9px 20px;background:transparent;color:#3d4d3a;border:1.5px solid #3d4d3a;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s; }
+.admin-btn-secondary:hover { background:#3d4d3a;color:#fff!important; }
+.admin-btn-danger { display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:transparent;color:#e53e3e;border:1.5px solid #e53e3e;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s; }
+.admin-btn-danger:hover { background:#e53e3e;color:#fff!important; }
+.admin-btn-icon { width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:1px solid #ddd;border-radius:6px;cursor:pointer;font-size:15px;transition:all .15s; }
+.admin-btn-icon:hover { background:#f5f5f5; }
+.admin-alert { padding:12px 16px;border-radius:8px;font-size:14px;margin-bottom:16px;display:flex;align-items:center;gap:8px; }
+.admin-alert-error { background:#fff5f5;color:#c53030;border:1px solid #feb2b2; }
+.admin-alert-success { background:#f0fff4;color:#276749;border:1px solid #9ae6b4; }
+.admin-alert-info { background:#ebf8ff;color:#2b6cb0;border:1px solid #bee3f8; }
+.admin-spinner { width:16px;height:16px;border:2px solid rgba(0,0,0,.15);border-top-color:currentColor;border-radius:50%;animation:adminSpin .7s linear infinite;display:inline-block; }
+@keyframes adminSpin { to { transform:rotate(360deg); } }
+.admin-badge { display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:600; }
+.badge-pending { background:#fffbeb;color:#b7791f; }
+.badge-confirmed { background:#ebf8ff;color:#2b6cb0; }
+.badge-preparing { background:#e9d8fd;color:#6b46c1; }
+.badge-shipping { background:#e6fffa;color:#276749; }
+.badge-delivered { background:#f0fff4;color:#276749; }
+.badge-cancelled { background:#fff5f5;color:#c53030; }
+.badge-completed { background:#f0fff4;color:#276749; }
+.badge-customer { background:#e9d8fd;color:#6b46c1; }
+.badge-admin { background:#1a2e18;color:#a3b18a; }
+.badge-active { background:#f0fff4;color:#276749; }
+.badge-inactive { background:#fff5f5;color:#c53030; }
+.admin-table-wrap { overflow-x:auto; }
+.admin-table { width:100%;border-collapse:collapse;font-size:14px; }
+.admin-table th { text-align:left;padding:10px 14px;background:#f8f9fa;color:#555;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid #e8eaed;white-space:nowrap; }
+.admin-table td { padding:12px 14px;border-bottom:1px solid #f0f0f0;color:#333;vertical-align:middle; }
+.admin-table tr:hover td { background:#fafafa; }
+.admin-table tr:last-child td { border-bottom:none; }
+.admin-toolbar { display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap; }
+.admin-search-input { flex:1;min-width:200px;padding:9px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:14px;outline:none;transition:border-color .15s; }
+.admin-search-input:focus { border-color:#3d4d3a; }
+.admin-select { padding:9px 14px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:14px;background:#fff;outline:none;cursor:pointer; }
+.admin-select:focus { border-color:#3d4d3a; }
+.admin-modal-backdrop { position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:center;justify-content:center;padding:24px; }
+.admin-modal { background:#fff;border-radius:16px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25);animation:modalIn .2s ease-out; }
+@keyframes modalIn { from{opacity:0;transform:scale(.95)} to{opacity:1;transform:scale(1)} }
+.admin-modal-header { padding:20px 24px 16px;border-bottom:1px solid #e8eaed;display:flex;align-items:center;justify-content:space-between; }
+.admin-modal-header h3 { margin:0;font-size:18px;font-weight:700;color:#1a2e18; }
+.admin-modal-body { padding:24px; }
+.admin-modal-footer { padding:16px 24px;border-top:1px solid #e8eaed;display:flex;justify-content:flex-end;gap:12px; }
+.admin-form-grid { display:grid;grid-template-columns:1fr 1fr;gap:16px; }
+.admin-form-grid.cols-1 { grid-template-columns:1fr; }
+.admin-field { display:flex;flex-direction:column;gap:6px; }
+.admin-field label { font-size:13px;font-weight:600;color:#444; }
+.admin-field input,.admin-field select,.admin-field textarea { padding:9px 12px;border:1.5px solid #e0e0e0;border-radius:8px;font-size:14px;outline:none;transition:border-color .15s;background:#fff;font-family:inherit; }
+.admin-field input:focus,.admin-field select:focus,.admin-field textarea:focus { border-color:#3d4d3a; }
+.admin-field textarea { resize:vertical;min-height:80px; }
+.admin-empty { text-align:center;padding:64px 24px;color:#999; }
+.admin-empty-icon { font-size:48px;margin-bottom:12px; }
+.admin-empty p { font-size:15px;margin:0; }
+.admin-pagination { display:flex;align-items:center;justify-content:space-between;margin-top:20px;font-size:13px;color:#666;flex-wrap:wrap;gap:12px; }
+.admin-pagination-btns { display:flex;gap:8px; }
+
+/* Shared keyboard focus: visible against both the paper and forest surfaces. */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--vang-primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

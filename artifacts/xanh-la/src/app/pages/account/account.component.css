@@ -1,0 +1,446 @@
+/* ── Page wrapper ──────────────────────────────────── */
+.acc-page {
+  padding: 48px max(24px, 4vw) 80px;
+  max-width: 960px;
+  margin: 0 auto;
+  background: var(--xanh-paper);
+  min-height: 80vh;
+}
+
+/* ── Title ─────────────────────────────────────────── */
+.acc-title {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--xanh-ink);
+  margin: 0 0 24px 0;
+}
+
+/* ── Tabs ───────────────────────────────────────────── */
+.acc-tabs {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 0;
+}
+
+.acc-tab {
+  background: transparent;
+  border: none;
+  padding: 10px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--xanh-muted);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.15s;
+}
+
+.acc-tab.is-active {
+  color: var(--xanh-ink);
+  font-weight: 600;
+}
+
+.acc-tab.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--xanh-ink);
+}
+
+.acc-tab-divider {
+  height: 1px;
+  background: var(--xanh-line);
+  margin-bottom: 40px;
+}
+
+/* ── Divider ────────────────────────────────────────── */
+.acc-divider {
+  height: 1px;
+  background: var(--xanh-line);
+  margin: 32px 0;
+}
+
+/* ── Section header ─────────────────────────────────── */
+.acc-section-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.acc-section-title {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--xanh-ink);
+  margin: 0 0 6px 0;
+}
+
+.acc-section-sub {
+  font-size: 14px;
+  color: var(--xanh-muted);
+  margin: 0;
+}
+
+.acc-header-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* ── Buttons ────────────────────────────────────────── */
+.acc-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background: var(--xanh-moss);
+  color: #fff !important;
+  border: none;
+  border-radius: var(--xanh-radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-decoration: none;
+}
+.acc-btn-primary:hover    { background: var(--xanh-moss-hover); }
+.acc-btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.acc-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background: transparent;
+  color: var(--xanh-ink);
+  border: 1.5px solid var(--xanh-line);
+  border-radius: var(--xanh-radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.acc-btn-outline:hover { border-color: var(--xanh-ink); }
+
+.acc-logout-btn {
+  background: transparent;
+  border: none;
+  color: #c53030;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 0;
+  text-decoration: underline;
+}
+
+/* ── Block ──────────────────────────────────────────── */
+.acc-block {
+  padding: 24px 0;
+}
+
+.acc-block-title {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--xanh-moss);
+  margin: 0 0 6px 0;
+}
+
+.acc-block-sub {
+  font-size: 14px;
+  color: var(--xanh-muted);
+  margin: 0 0 24px 0;
+}
+
+/* ── Form rows ──────────────────────────────────────── */
+.acc-form-row {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.acc-form-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.acc-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.acc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.acc-field label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--xanh-ink);
+}
+
+.acc-field input,
+.acc-field select {
+  padding: 10px 14px;
+  border: 1px solid var(--xanh-line);
+  border-radius: var(--xanh-radius-sm);
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--xanh-ink);
+  background: var(--xanh-paper);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.acc-field input:focus,
+.acc-field select:focus {
+  border-color: var(--xanh-moss);
+}
+
+.acc-field-lock input {
+  padding-right: 40px;
+}
+
+.acc-lock-icon {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  font-size: 16px;
+  color: #999;
+}
+
+/* ── Avatar ─────────────────────────────────────────── */
+.acc-avatar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.acc-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #3d8f8a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: 'Georgia', serif;
+}
+
+.acc-avatar-label {
+  font-size: 13px;
+  color: var(--xanh-muted);
+  margin: 0;
+}
+
+.acc-info-icon {
+  font-size: 13px;
+  color: #999;
+}
+
+/* ── Login info ─────────────────────────────────────── */
+.acc-login-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.acc-login-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.acc-login-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--xanh-ink);
+}
+
+.acc-login-value {
+  font-size: 14px;
+  color: var(--xanh-muted);
+}
+
+/* ── Privacy row ────────────────────────────────────── */
+.acc-privacy-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  font-size: 15px;
+  color: var(--xanh-ink);
+  cursor: pointer;
+}
+
+.acc-privacy-static {
+  padding: 14px 0;
+}
+
+/* ── Alert ──────────────────────────────────────────── */
+.acc-alert-success {
+  background: #f0fff4;
+  color: #276749;
+  border: 1px solid #9ae6b4;
+  border-radius: var(--xanh-radius-sm);
+  padding: 12px 16px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* ── Bottom actions ─────────────────────────────────── */
+.acc-bottom-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* ── Empty state ────────────────────────────────────── */
+.acc-empty {
+  text-align: center;
+  padding: 64px 24px;
+}
+
+.acc-empty-text {
+  font-size: 15px;
+  color: var(--xanh-muted);
+  margin: 0 0 20px 0;
+}
+
+/* ── Address cards ──────────────────────────────────── */
+.acc-address-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.acc-address-card {
+  border: 1px solid var(--xanh-line);
+  border-radius: var(--xanh-radius-md);
+  padding: 20px;
+  background: #fff;
+  transition: box-shadow 0.15s;
+}
+
+.acc-address-card.is-default {
+  border-color: var(--xanh-moss);
+}
+
+.acc-address-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+}
+
+.acc-address-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.acc-address-label {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--xanh-ink);
+}
+
+.acc-badge-default {
+  font-size: 11px;
+  background: var(--xanh-moss);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-weight: 600;
+}
+
+.acc-address-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--xanh-ink);
+  margin-bottom: 4px;
+}
+
+.acc-address-detail {
+  font-size: 14px;
+  color: var(--xanh-muted);
+  line-height: 1.5;
+}
+
+.acc-address-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--xanh-line);
+}
+
+.acc-link-btn {
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  color: var(--xanh-moss);
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.acc-link-danger { color: #c53030; }
+
+/* ── Address form ───────────────────────────────────── */
+.acc-address-form {
+  background: #fff;
+  border: 1px solid var(--xanh-line);
+  border-radius: var(--xanh-radius-md);
+  padding: 28px;
+  margin-top: 24px;
+}
+
+.acc-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--xanh-ink);
+  cursor: pointer;
+}
+
+.acc-checkbox-row input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--xanh-moss);
+  cursor: pointer;
+}
+
+.acc-form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 640px) {
+  .acc-title { font-size: 24px; }
+  .acc-form-row { flex-direction: column; }
+  .acc-grid-2  { grid-template-columns: 1fr; }
+  .acc-section-header { flex-direction: column; }
+  .acc-header-actions { width: 100%; justify-content: flex-end; }
+  .acc-tabs { gap: 20px; }
+}
